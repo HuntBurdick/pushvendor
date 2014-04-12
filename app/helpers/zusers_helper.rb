@@ -1,2 +1,0 @@
-module ZusersHelper
-end
