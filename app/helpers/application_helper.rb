@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def raw_sales
-		sales = Sale.find(:all)
+		sales = Sale.all
 		total = 0.00
 		for sale in sales
 			unless sale.total_amount.blank?
@@ -13,7 +13,7 @@ module ApplicationHelper
 
 
 	def payment_total
-		payments = Payment.find(:all)
+		payments = Payment.all
 		payment_total = 0.00
 		for payment in payments
 			payment_total += payment.amount.blank? ? 0.00 : payment.amount_after_change

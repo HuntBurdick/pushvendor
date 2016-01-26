@@ -7,5 +7,5 @@ class Item < ActiveRecord::Base
 	validates :price, :presence => true
 	validates :stock_amount, :presence => true
 
-	default_scope :order => 'sku ASC'
+	default_scope order('sku ASC')
 end

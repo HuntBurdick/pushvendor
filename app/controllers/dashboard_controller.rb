@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   def index
-  	@recent_sales = Sale.find(:all, :limit => 10, :order => 'id DESC')
-  	@popular_items = Item.find(:all, :limit => 10, :order => 'amount_sold DESC')
+  	@recent_sales = begin Sale.find(:all, :limit => 10, :order => 'id DESC') rescue [] end
+  	@popular_items = begin Item.find(:all, :limit => 10, :order => 'amount_sold DESC') rescue [] end
   end
 
   def create_sale_with_product
