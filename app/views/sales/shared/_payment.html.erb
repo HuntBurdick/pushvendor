@@ -3,7 +3,7 @@
 	<hr />
 	<%= form_for :payments, :url => url_for(:controller => "payments", :action => "make_payment"), :method => "get", :remote => true do |f| %>
 		<label>Type</label>
-		<%= f.select :payment_type, [['Credit Card', 'credit_card'], ['Cash', 'cash'], ['Check', 'check'], ['Other', 'other']], {}, { :class => "form-control" } %>
+		<%= f.select :payment_type, [['NK', 'NK'], ['JP', 'JP']], {}, { :class => "form-control" } %>
 		<label>Amount</label>
 		<%= f.text_field :amount, :class => "form-control", :placeholder => "Amount", :value => @sale.remaining_balance %>
 		<%= f.hidden_field :sale_id, :value => @sale.id %>
