@@ -2,7 +2,7 @@ class SalesController < ApplicationController
   before_action :set_configurations
 
   def index
-    @sales = Sale.paginate(:page => params[:page], :per_page => 20, :order => 'id DESC')
+    @sales = Sale.paginate(:page => params[:page], :per_page => 20).order(id: :desc)
   end
 
   def new
@@ -311,11 +311,11 @@ class SalesController < ApplicationController
     end
 
     def populate_items
-      @available_items = Item.all(:conditions => ['published', true], :limit => 5)
+      @available_items = Item.all.limit(5)
     end
 
     def populate_customers
-      @available_customers = Customer.all(:conditions => ['published', true], :limit => 5)
+      @available_customers = Customer.all.limit(5)
     end
 
     def remove_item_from_stock(item_id, quantity)
