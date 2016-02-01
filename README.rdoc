@@ -4,8 +4,10 @@ Project forked from websitescenes/pushvendor. A simple sales and inventory manag
 
 === Deploy Instructions
 
-kill_rails
-start_server
+```shell
+$ kill_rails
+$ start_server
+```
 
 ____________________________________________________
 
