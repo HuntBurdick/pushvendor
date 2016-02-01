@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131220809) do
+ActiveRecord::Schema.define(version: 20160201195159) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "first_name",    limit: 255
@@ -28,13 +28,15 @@ ActiveRecord::Schema.define(version: 20160131220809) do
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.string   "buyer",       limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "amount",      limit: 4
+    t.string   "name",            limit: 255
+    t.text     "description",     limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "amount",          limit: 4
+    t.integer  "money_source_id", limit: 4
   end
+
+  add_index "expenses", ["money_source_id"], name: "index_expenses_on_money_source_id", using: :btree
 
   create_table "item_categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -67,13 +69,22 @@ ActiveRecord::Schema.define(version: 20160131220809) do
     t.datetime "updated_at"
   end
 
+  create_table "money_sources", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "payments", force: :cascade do |t|
-    t.integer  "sale_id",      limit: 4
-    t.decimal  "amount",                   precision: 8, scale: 2
-    t.string   "payment_type", limit: 255
+    t.integer  "sale_id",         limit: 4
+    t.decimal  "amount",                      precision: 8, scale: 2
+    t.string   "payment_type",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "money_source_id", limit: 4
   end
+
+  add_index "payments", ["money_source_id"], name: "index_payments_on_money_source_id", using: :btree
 
   create_table "sales", force: :cascade do |t|
     t.decimal  "amount",                         precision: 8,  scale: 2
@@ -129,4 +140,6 @@ ActiveRecord::Schema.define(version: 20160131220809) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "expenses", "money_sources"
+  add_foreign_key "payments", "money_sources"
 end
