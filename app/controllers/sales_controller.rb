@@ -22,6 +22,9 @@ class SalesController < ApplicationController
     @custom_item = Item.new
     @custom_customer = Customer.new
 
+    @money_sources = []
+    MoneySource.all.map {|x| @money_sources << [x.name, x.id] }
+
   end
 
   def destroy
