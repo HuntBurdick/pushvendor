@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160202012152) do
     t.datetime "updated_at",                                            null: false
     t.decimal  "amount",                        precision: 8, scale: 2
     t.integer  "money_source_id", limit: 4
+    t.string   "made_by",         limit: 255
   end
 
   add_index "expenses", ["money_source_id"], name: "index_expenses_on_money_source_id", using: :btree
