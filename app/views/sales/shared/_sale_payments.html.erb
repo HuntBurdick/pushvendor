@@ -4,7 +4,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>Payment Type</th>
+        <th>Money Source</th>
         <th>Amount</th>
         <th>Created At</th>
       </tr>
@@ -19,7 +19,8 @@
         <%= fields_for @sale do |f|%>
           <%= f.fields_for :payments do |e| %>
     	      <tr>
-    	        <td><%= e.text_field :payment_type, :class => "form-control", :placeholder => "Payment Type", :readonly => true %></td>
+
+    	        <td><%= e.text_field :money_source_id, :value => e.object.money_source.try(:name) || '', :class => "form-control", :placeholder => "Money Source", :readonly => true %></td>
     	        <td><%= e.text_field :amount, :class => "form-control", :placeholder => "Amount", :readonly => true %></td>
     	        <td><%= e.text_field :created_at, :class => "form-control", :placeholder => "Created At", :readonly => true %></td>
     	      </tr>
