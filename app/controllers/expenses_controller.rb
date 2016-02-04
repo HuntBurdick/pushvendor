@@ -7,6 +7,7 @@ class ExpensesController < ApplicationController
 
  def show
     set_expense
+    set_money_sources
   end
 
 
