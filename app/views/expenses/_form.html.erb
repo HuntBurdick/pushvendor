@@ -30,7 +30,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label>Made By</label>
-          <%= f.select :made_by,[['NK', 'NK'], ['JP', 'JP']], {}, :class => "form-control", :placeholder => "Expense made By..." %>
+          <%= f.select :money_source_id, @money_sources, {}, :class => "form-control", :placeholder => "Expense made By..." %>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@
               <td><%= expense.name %></td>
               <td><%= expense.amount %></td>
               <td><%= expense.created_at %></td>
-              <td><%= expense.made_by %></td>
+              <td><%= expense.money_source.try(:name) %></td>
               <td><%= link_to 'Show', edit_expense_path(expense) %> | <%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>

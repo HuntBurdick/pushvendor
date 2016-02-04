@@ -12,6 +12,7 @@ class ExpensesController < ApplicationController
 
   def new
     @expense = Expense.new
+    set_money_sources
   end
 
  def destroy
@@ -51,6 +52,7 @@ class ExpensesController < ApplicationController
   end
 
   def edit
+    set_money_sources
   end
 
   private
@@ -62,6 +64,11 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params.require(:expense).permit(:image_url, :name, :description, :amount, :made_by)
+      params.require(:expense).permit(:image_url, :name, :description, :amount, :money_source_id)
+    end
+
+    def set_money_sources
+      @money_sources = []
+      MoneySource.all.map {|x| @money_sources << [x.name, x.id] }
     end
 end
