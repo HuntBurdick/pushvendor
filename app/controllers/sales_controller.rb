@@ -12,6 +12,7 @@ class SalesController < ApplicationController
 
   def edit
     set_sale
+    set_money_sources
 
     populate_items
     populate_customers
@@ -22,8 +23,6 @@ class SalesController < ApplicationController
     @custom_item = Item.new
     @custom_customer = Customer.new
 
-    @money_sources = []
-    MoneySource.all.map {|x| @money_sources << [x.name, x.id] }
 
   end
 
@@ -44,6 +43,7 @@ class SalesController < ApplicationController
   # searched Items
   def update_line_item_options
     set_sale
+    set_money_sources
     populate_items
 
     if params[:search][:item_category].blank?
@@ -61,6 +61,7 @@ class SalesController < ApplicationController
 
   def update_customer_options
     set_sale
+    set_money_sources
     populate_items
     @available_customers = Customer.where('last_name LIKE ? OR first_name LIKE ? OR email_address LIKE ? OR phone_number LIKE ?', "%#{params[:search][:customer_name]}%","%#{params[:search][:customer_name]}%", "%#{params[:search][:customer_name]}%", "%#{params[:search][:customer_name]}%").limit(5)
 
@@ -71,6 +72,7 @@ class SalesController < ApplicationController
 
   def create_customer_association
     set_sale
+    set_money_sources
 
     unless @sale.blank? || params[:customer_id].blank?
       @sale.customer_id = params[:customer_id]
@@ -87,6 +89,7 @@ class SalesController < ApplicationController
   def create_line_item
     set_sale
     populate_items
+    set_money_sources
 
     existing_line_item = LineItem.where("item_id = ? AND sale_id = ?", params[:item_id], @sale.id).first
     
@@ -117,6 +120,7 @@ class SalesController < ApplicationController
   def remove_item
     set_sale
     populate_items
+    set_money_sources
 
     line_item = LineItem.where(:sale_id => params[:sale_id], :item_id => params[:item_id]).first
     line_item.quantity -= 1
@@ -140,6 +144,7 @@ class SalesController < ApplicationController
   def add_item
     set_sale
     populate_items
+    set_money_sources
 
     line_item = LineItem.where(:sale_id => params[:sale_id], :item_id => params[:item_id]).first
     line_item.quantity += 1
@@ -158,6 +163,7 @@ class SalesController < ApplicationController
   def create_custom_item
     set_sale
     populate_items
+    set_money_sources
 
     custom_item = Item.new
     custom_item.sku = "CI#{(rand(5..30) + rand(5..30)) * 11}_#{(rand(5..30) + rand(5..30)) * 11}"
@@ -183,6 +189,7 @@ class SalesController < ApplicationController
   def create_custom_customer
     set_sale
     populate_items
+    set_money_sources
 
     custom_customer = Customer.new
     custom_customer.first_name = params[:custom_customer][:first_name]
@@ -257,6 +264,7 @@ class SalesController < ApplicationController
     tax_amount = get_tax_rate
 
     set_sale
+    set_money_sources
 
     @sale.amount = 0.00
 
@@ -279,6 +287,7 @@ class SalesController < ApplicationController
 
   def add_comment
     set_sale
+    set_money_sources
     @sale.comments = params[:sale_comments][:comments]
     @sale.save
 
@@ -340,6 +349,11 @@ class SalesController < ApplicationController
       else
         return @configurations.tax_rate.to_f * 0.01
       end
+    end
+
+    def set_money_sources
+      @money_sources = []
+      MoneySource.all.map {|x| @money_sources << [x.name, x.id] }
     end
 
 end
