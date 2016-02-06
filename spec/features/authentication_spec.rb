@@ -14,8 +14,9 @@ feature "the login process" do
 
   feature "signing up a user"  do
      before(:each) do
-       create_default_user
-       login("admin", "password")
+      clean_database
+      create_default_user
+      login("admin", "password")
      end
 
     scenario "flashes that the user has signed in" do
