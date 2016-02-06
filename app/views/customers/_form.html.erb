@@ -52,4 +52,27 @@
         </div>
       <% end %>
   </div>
+  <% if @latest_orders.respond_to?(:each) %>
+    <div class="panel-heading">Latest Orders</div>
+    <div class="panel-body">
+      <div class="row">
+        <% @latest_orders.each do |order| %>
+          <div class="col-sm-6 col-sm-offset-3">
+            <div class="list-group">
+              <% if order.remaining_balance == 0.00 && order.payments.count %>
+                <a class="list-group-item list-group-item-success">
+              <% else %>
+                <a class="list-group-item list-group-item-danger">
+              <% end %>
+                <h4 class="list-group-item-heading"><%= order.created_at %> (Order ID: <%= order.id %>)</h4>
+                  <% order.line_items.each do |line_item| %>
+                    <p class="list-group-item-text"><%= line_item.item.name %> <%= line_item.quantity %> unidades: $<%= line_item.item.price*line_item.quantity %></p>
+                  <% end %>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div> 

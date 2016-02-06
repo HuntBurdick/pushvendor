@@ -15,7 +15,13 @@
 
         <tbody>
           <% @items.each do |item| %>
-            <tr class="<%= item.stock_amount > 0 ? '' : 'danger' %>">
+            <% if item.stock_amount > 0 && item.stock_amount < 5 %>
+              <tr class='warning'>
+            <% elsif item.stock_amount >= 5 %>
+              <tr class='success'>
+            <% else %>
+              <tr class='danger'>
+            <% end %>
               <td><%= item.sku %></td>
               <td><%= item.name %></td>
               <td><%= item.item_category.blank? ? '-' : item.item_category.name %></td>

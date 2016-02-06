@@ -41,6 +41,10 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+def clean_database
+  User.delete_all
+end
+
 def login(username, password)
   visit new_user_url
   fill_in 'user_username', :with => username

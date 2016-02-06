@@ -20,6 +20,7 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit
     @customer = Customer.find(params[:id])
+    @latest_orders = @customer.sales.reverse.last(5)
   end
 
   # POST /customers

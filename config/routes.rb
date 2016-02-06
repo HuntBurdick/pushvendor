@@ -1,5 +1,9 @@
 PushvendorPos::Application.routes.draw do
 
+  get 'expenses/new'
+#  get 'expenses'
+  get 'expenses/edit'
+  resources :expenses
   resources :item_categories
 
   resources :reports do

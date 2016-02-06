@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
-gem 'rails', '4.0.1'
+gem 'rails', '4.2.5'
 gem 'devise'
 gem 'cancancan', '~> 1.7'
 gem 'will_paginate-bootstrap'
+gem 'mysql2'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.1.1'
@@ -25,7 +25,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'debugger'
+  gem 'byebug'
 end
 
 group :test do

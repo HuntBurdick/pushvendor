@@ -1,0 +1,48 @@
+<%= form_for(@expense) do |f| %>
+  <%= render :partial => 'template/form_errors', :object => @expense %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+   
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Name</label>
+          <%= f.text_field :name, :class => "form-control", :placeholder => "Expense Name" %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Description of Expense</label>
+          <%= f.text_area :description, :class => "form-control", :placeholder => "Expense Description" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Amount</label>
+          <%= f.text_field :amount, :class => "form-control", :placeholder => "Expense Amount" %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Made By</label>
+          <%= f.select :money_source_id, @money_sources, {}, :class => "form-control", :placeholder => "Expense made By..." %>
+        </div>
+      </div>
+    </div>
+
+    
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= f.submit 'Update Expense', :class => "btn btn-success btn-lg" %>
+  </div>
+</div>
+<% end %>
