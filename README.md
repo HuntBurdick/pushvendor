@@ -1,6 +1,6 @@
 # PushVendor Prototype
 
-This is an early prototype for the PushVendor point of sale that we decided to open source. Our new commercial offering bears little resemblence to this early prototype. You're free to take this repo and use it as you will. We learned a lot from this experiment.
+This is an early prototype for the PushVendor point of sale that we decided to open source. Our new commercial offering bears little resemblence to this early prototype. You're free to take this repo and use it as you will. We learned a lot from this experiment.very excited to getting started.
 
 
 ## Getting Started
